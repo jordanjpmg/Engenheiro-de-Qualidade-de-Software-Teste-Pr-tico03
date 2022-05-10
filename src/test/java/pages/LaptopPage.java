@@ -1,8 +1,6 @@
 package pages;
 
 import DAO.MysqlConected;
-import atributes.CartAtributes;
-import atributes.CartAtributes.*;
 import atributes.LaptopAtributes;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
@@ -38,11 +36,19 @@ public class LaptopPage extends LaptopAtributes {
 
     }
 
-    public void clickAlterColor() {
+    public void selectColor() throws Exception {
         wait(3);
-        colorBlack.click();
-        selectedColor = colorBlack.getAttribute("title");
-        log("Alterou cor");
+        MysqlConected mysqlConected = new MysqlConected();
+        Map<String, String> results = mysqlConected.serchMassa();
+        String colorProductDB = results.get("COLOR");
+        for (WebElement color : listColors){
+            if(color.getAttribute("title").equals(colorProductDB)){
+                color.click();
+                selectedColor = color.getAttribute("title");
+                log("Selecionou cor "+selectedColor);
+                return;
+            }
+        }
     }
 
     public void clickAddToCart() {

@@ -13,8 +13,8 @@ public class LaptopSteps {
     }
 
     @E("altero a cor do produto de acordo com a cor informada no banco de automação")
-    public void clickAlterColor(){
-        new LaptopPage().clickAlterColor();
+    public void clickAlterColor() throws Exception {
+        new LaptopPage().selectColor();
     }
 
     @Quando("clico no botão “Add to cart”")
